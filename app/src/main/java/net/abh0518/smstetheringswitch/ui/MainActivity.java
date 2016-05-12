@@ -3,7 +3,9 @@ package net.abh0518.smstetheringswitch.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
 import net.abh0518.smstetheringswitch.R;
 import net.abh0518.smstetheringswitch.cofiguration.Configuration;
@@ -13,6 +15,7 @@ public class MainActivity extends Activity {
 
     EditText mSwitchOnText;
     EditText mSwitchOffText;
+    ToggleButton mReportSmsToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,16 @@ public class MainActivity extends Activity {
                 configuration.setDisableWifiHotspotKeyword(mSwitchOffText.getText().toString());
             }
         });
+
+        mReportSmsToggle = (ToggleButton)findViewById(R.id.report_sms_toggle);
+        mReportSmsToggle.setChecked(configuration.getReportSMS());
+        mReportSmsToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                configuration.setReportSMS(isChecked);
+            }
+        });
+
     }
 
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SmsTetheringSwitch</string>
+    <string name="tethering_switch_on">Tethering is enabled.</string>
+    <string name="tethering_switch_off">Tethering is disabled.</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+
 </resources>

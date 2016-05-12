@@ -33,5 +33,15 @@ public class Configuration {
 		return this.sharedPreferences.getString("hotspotDisableKeyword", "");
 	}
 
+	public void setReportSMS(boolean flag){
+		Editor editor = this.sharedPreferences.edit();
+		editor.putBoolean("reportSMS", flag);
+		editor.commit();
+	}
+
+	public boolean getReportSMS(){
+		return this.sharedPreferences.getBoolean("reportSMS", false);
+	}
+
 
 }
