@@ -6,10 +6,28 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="left"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Tethering Switch"/>
+
+        <ToggleButton
+            android:id="@+id/tethering_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wifi Tethering Enable Keyword"/>
+        android:text="Wifi Tethering Enable SMS Keyword"/>
 
     <EditText
         android:id="@+id/switch_on_text"
@@ -22,7 +40,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wifi Tethering Disable Keyword"/>
+        android:text="Wifi Tethering Disable SMS Keyword"/>
 
     <EditText
         android:id="@+id/switch_off_text"
@@ -31,6 +49,19 @@
         android:hint="Put the keyword to disable wifi hotspot tethering."
         android:text=""/>
 
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tethering Keep Alive Time (0 means forever)"/>
+
+    <EditText
+        android:id="@+id/turn_keep_alive_time_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Duration time(minutes) to keep alive tethering."
+        android:inputType="numberSigned"
+        android:text=""/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,10 +79,7 @@
             android:id="@+id/report_sms_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
     </LinearLayout>
-
-
 
     <Button
         android:id="@+id/save"

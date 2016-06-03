@@ -43,5 +43,15 @@ public class Configuration {
 		return this.sharedPreferences.getBoolean("reportSMS", false);
 	}
 
+	public void setKeepAliveTime(int minutes){
+		Editor editor = this.sharedPreferences.edit();
+		editor.putInt("keepAlive", minutes);
+		editor.commit();
+	}
+
+	public int getKeepAliveTime(){
+		return this.sharedPreferences.getInt("keepAlive", 0);
+	}
+
 
 }

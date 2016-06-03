@@ -34,7 +34,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
                     boolean tetheringEnabled = false;
                     if(configuration.getDisableWifiHotspotKeyword().equals(message)){
-                        enableWifiHotspot(context, false);
+                        enableWifiHotspot(context, false, configuration.getKeepAliveTime());
                         tetheringEnabled = false;
                     }
                     else if(configuration.getEnableWifiHotspotKeyword().equals(message)){
@@ -44,14 +44,20 @@ public class SmsReceiver extends BroadcastReceiver {
 
                     if(configuration.getReportSMS()){
                         sendSms(from, tetheringEnabled ? context.getResources().getString(R.string.tethering_switch_on)
-                                                        : context.getResources().getString(R.string.tethering_switch_off));
+                                 + " Keep alive time is " + configuration.getKeepAliveTime() + " minutes."
+                                : context.getResources().getString(R.string.tethering_switch_off));
                     }
                 }
             }
         }
 	}
 
-    public void enableWifiHotspot(Context context, boolean flag) {
+    public static void enableWifiHotspot(Context context, boolean flag, int keepAliveMinutes){
+        enableWifiHotspot(context, flag);
+        AlarmReceiver.setHotspotKeepAliveTimer(context, keepAliveMinutes);
+    }
+
+    private static void enableWifiHotspot(Context context, boolean flag) {
         WifiManager wifimanager = (WifiManager) context.getSystemService(context.WIFI_SERVICE);
         WifiConfiguration wificonfiguration = null;
         try {
@@ -70,7 +76,19 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
-    private void sendSms(String phoneNumber, String msg){
+    public static boolean getWifiHotspotEnabled(Context context){
+        WifiManager wifimanager = (WifiManager) context.getSystemService(context.WIFI_SERVICE);
+        try {
+            Method method = wifimanager.getClass().getMethod("isWifiApEnabled");
+            return (Boolean)method.invoke(wifimanager);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private static void sendSms(String phoneNumber, String msg){
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(phoneNumber, null, msg, null, null);
     }

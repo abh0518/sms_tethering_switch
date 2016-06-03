@@ -28,6 +28,9 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name="net.abh0518.smstetheringswitch.receiver.AlarmReceiver"
+            android:process=":remote" />
+
     </application>
 
 </manifest>
