@@ -7,6 +7,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import net.abh0518.smstetheringswitch.service.WifiHotspotService;
+
 public class AlarmReceiver extends BroadcastReceiver {
 
     private static final String TYPE_HOTSPOT_KEEP_ALIVE_TIMER = "TYPE_HOTSPOT_KEEP_ALIVE_TIMER";
@@ -15,7 +17,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
         if(intent.hasExtra(TYPE_HOTSPOT_KEEP_ALIVE_TIMER)){
-            SmsReceiver.enableWifiHotspot(context, false, 0);
+            WifiHotspotService.enableWifiHotspot(context, false, 0);
         }
 	}
 

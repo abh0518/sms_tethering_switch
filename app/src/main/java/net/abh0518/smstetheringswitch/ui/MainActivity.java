@@ -10,7 +10,7 @@ import android.widget.ToggleButton;
 import net.abh0518.smstetheringswitch.R;
 import net.abh0518.smstetheringswitch.cofiguration.Configuration;
 import net.abh0518.smstetheringswitch.receiver.AlarmReceiver;
-import net.abh0518.smstetheringswitch.receiver.SmsReceiver;
+import net.abh0518.smstetheringswitch.service.WifiHotspotService;
 
 public class MainActivity extends Activity {
 
@@ -27,15 +27,15 @@ public class MainActivity extends Activity {
         final Configuration configuration = new Configuration(this);
 
         mTetheringSwitch = (ToggleButton)findViewById(R.id.tethering_toggle);
-        mTetheringSwitch.setChecked(SmsReceiver.getWifiHotspotEnabled(this));
+        mTetheringSwitch.setChecked(WifiHotspotService.getWifiHotspotEnabled(this));
         mTetheringSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    SmsReceiver.enableWifiHotspot(MainActivity.this, true, configuration.getKeepAliveTime());
+                    WifiHotspotService.enableWifiHotspot(MainActivity.this, true, configuration.getKeepAliveTime());
                 }
                 else{
-                    SmsReceiver.enableWifiHotspot(MainActivity.this, false, configuration.getKeepAliveTime());
+                    WifiHotspotService.enableWifiHotspot(MainActivity.this, false, configuration.getKeepAliveTime());
                 }
             }
         });
